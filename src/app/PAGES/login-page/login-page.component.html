@@ -1,0 +1,144 @@
+<div class="row backimage m-0" styles="width:100vw,height:100vh">
+
+  <div class="row m-0" style="width:100vw">
+    <div class="col-12"><p></p></div>
+    <div class="col-12 text-center"><h4>MIS SPD RUSA CHD</h4></div>
+    <div class="col-12"><p></p></div>
+  </div>
+
+      
+    <!-- Image Division -->
+    <div class="row m-0" style="width:100vw">
+      <!-- ..Space.. -->
+       <div class="col-12"><p></p></div>
+        <div class="col-12"><p></p></div>
+      <!-- .........  -->
+      <div class="col-3">
+        <p></p>
+      </div>
+      
+      <div class="col-6 text-center">
+        <img src="assets/Images/Icon.png"/>
+      </div>
+      
+      <div class="col-3">
+        <p></p>
+      </div>
+
+    </div>
+  <!-- ............. -->
+  
+    <!-- ..Space.. -->
+      <div class="row m-0" style="width:100vw">
+        <div class="col-12"><p></p><p></p></div>
+        <div class="col-12"><p></p></div>
+      </div>
+    <!-- .........  -->
+
+  <!--...... Form .......-->
+    <div>
+      <form [formGroup]="LoginForm" (ngSubmit)="LogIn(LoginForm.value)">
+
+        <!-- ...EmailId... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="col-1"> <!--Spacing-->
+              <p></p>
+            </div>
+      
+            <div class="form-group col-10 text-center">  <!--Email Id-->
+              <mat-form-field style="width:100%">
+                <mat-label class="font-size"><span><mat-icon class="mr-1">email</mat-icon>EmailId</span></mat-label>
+                <input type="text" matInput formControlName="EmailId"/>
+                <mat-error *ngIf ="!LoginForm.controls['EmailId'].valid && LoginForm.controls['EmailId'].touched">Please Enter the valid email Id</mat-error>
+              </mat-form-field>
+            </div>
+      
+            <div class="col-1"> <!--Spacing-->
+              <p></p>
+            </div>
+
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Password... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="col-1">
+              <p></p>
+            </div>
+
+            <div class="form-group col-10">
+              <mat-form-field style="width:100%">
+                <mat-label class="font-size"><span><mat-icon class="mr-1">lock</mat-icon>Password</span></mat-label>
+                <input type="password" matInput formControlName="Password"/>
+                <mat-error *ngIf ="!LoginForm.controls['Password'].valid && LoginForm.controls['Password'].touched">Please Enter the Password</mat-error>
+              </mat-form-field>    
+            </div> 
+             
+            
+            <div class="col-1">
+              <p></p>
+            </div>
+
+          </div>
+        <!-- .............. -->
+
+        <!-- ....Button.... -->
+          <div class="row m-0" style="width:100vw">
+            <div class="col-12"><p></p></div> <!---->
+
+            <div class="col-3">
+              <p></p>
+            </div>
+            
+            <div class="col-6 px-0 text-center">
+              <button mat-raised-button color="accent" type="Submit" style="width:100%" [disabled]="!LoginForm.valid">Submit</button>
+              <a routerLink="/ForgotPassword" class="text-center text-primary">Forgot The Password</a>
+            </div>
+
+            <div class="col-3">
+              <p></p>
+            </div>
+
+          </div>  
+        <!-- ............ -->
+
+      </form>
+    </div>
+  <!-- ..............  -->
+    
+    <!-- SPACE -->
+      <div class="row m-0" style="width:100vw">
+        <div class="col-12">
+          <p></p>
+        </div>
+        
+        <div class="col-12">
+          <p></p>
+        </div>
+        
+        <div class="col-12">
+          <p></p>
+        </div>
+      </div>
+    <!-- ..... -->
+
+
+  <!-- SignUp Option-->
+    <div class="row m-0" style="width:100vw">
+      
+      <div class="col-1"><p></p></div>
+
+      <div class="pl-3 col-10 text-center">
+          Don't Have An Account? 
+          <a [routerLink]="['/SignUp']">SignUp</a>
+      </div>
+
+      <div class="col-1"><p></p></div>
+
+    </div>
+  <!-- ...........  -->
+  </div>
+
+

@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$custom-theme-first:mat-palette($mat-blue);
+$custom-theme-accent:mat-palette($mat-green);
+
+$custom-app-theme: mat-light-theme($custom-theme-first, $custom-theme-accent);
+
+@include angular-material-theme($custom-app-theme);

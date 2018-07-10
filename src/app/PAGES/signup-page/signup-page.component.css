@@ -1,0 +1,20 @@
+.backimage
+{
+    background-image: url("../../../assets/Images/back.jpg");
+
+    /* Full height */
+    min-height: 100vh;
+    max-height: 100%;
+    width:100vw;
+
+    /* Center and scale the image nicely */
+    /* background-position: 47% 100%;  */
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 200% 145%;
+}
+
+.font-size
+{
+    font-size: 1.2em;
+}

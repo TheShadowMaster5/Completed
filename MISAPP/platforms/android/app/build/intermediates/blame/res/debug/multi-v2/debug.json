@@ -1,0 +1,48 @@
+{
+    "logs": [
+        {
+            "outputFile": "/media/vikas/c727be02-5353-4728-af10-1d54e2d7a91d/Angular/FinalWork-master/MISAPP/platforms/android/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/media/vikas/c727be02-5353-4728-af10-1d54e2d7a91d/Angular/FinalWork-master/MISAPP/platforms/android/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "164,55,105",
+                        "endColumns": "63,49,58",
+                        "endOffsets": "223,100,159"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,119,169",
+                        "endColumns": "63,49,58",
+                        "endOffsets": "114,164,223"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/spd/AngularProjects/Finishing-master/MISAPP/platforms/android/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/spd/AngularProjects/Finishing-master/MISAPP/platforms/android/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "164,55,105",
+                        "endColumns": "63,49,58",
+                        "endOffsets": "223,100,159"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,119,169",
+                        "endColumns": "63,49,58",
+                        "endOffsets": "114,164,223"
+                    }
+                }
+            ]
+        }
+    ]
+}

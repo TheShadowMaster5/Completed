@@ -1,0 +1,50 @@
+<table class="table">
+
+  <thead>
+  <tr>
+    <th class="text-center right-border">College Name</th>
+    <th class="text-center">Expenditure</th>
+  </tr>
+</thead>
+
+<tbody>
+  <tr class="bottom-border" *ngFor="let data_arr of collegename; let i = index ">
+    <td class="right-border">{{collegename[i]}}</td>
+    <td class="p-0">
+      <table class="table">
+        <tr>
+          <td>Construction</td>
+          <td>:</td>
+          <td>{{ExpConstArr[i]}}</td>
+        </tr>
+      
+        <tr>
+          <td>Equipment</td>
+          <td>:</td>
+          <td>{{ExpEqpArr[i]}}</td>
+        </tr>
+
+        <tr>
+          <td>Renovation</td>
+          <td>:</td>
+          <td>{{ExpRenArr[i]}}</td> 
+        </tr>
+
+        <tr>
+          <td>Others</td>
+          <td>:</td>
+          <td>{{Others[i]}}</td>
+        </tr>
+
+        <tr>
+          <td>Total</td>
+          <td>:</td>
+          <td>{{TotalExp[i]}}</td>
+        </tr>
+        
+      </table>
+    </td>
+  </tr>
+</tbody>
+
+</table>

@@ -1,0 +1,30 @@
+<div>
+    
+    <div class="row p-2 m-0" style="width:100%">
+        <div class="col-12">
+            <h2 mat-dialog-title role="alertdialog" class="text-center mb-0">
+                <img src={{Image}} width="90vw">
+            </h2>
+        </div>
+    </div>
+    
+    <div class="row m-0" style="width:100%">
+        <div class="col-12 text-center"><h2>{{Title}}</h2></div>
+        <div class="col-1"><p></p></div>
+        <div class="col-10 text-center">
+            <mat-dialog-content>{{Message}}</mat-dialog-content>
+        </div>    
+        <div class="col-1"><p></p></div>    
+    </div>
+    
+    <div class="row m-0 p-3" style="width:100%">
+        <div class="col-12 text-center">
+            <mat-dialog-actions class="mb-0 py-0" style="width:100%">
+                <button mat-raised-button [color]="Color" (click)="Navigate()" style="width:100%;height:6vh" [mat-dialog-close]="true">
+                    <h5 class="text-white">OK</h5>
+                </button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="table-responsive-sm ">
+  <table class="table pt-3">
+
+    <thead>
+    <tr class="bottom-border top-border left-border ">
+      <th class="right-border pl-1" scope="col-2">Project Type</th>
+      <th class="right-border pl-1" scope=" col-5">Asset Type</th>
+      <th class="right-border pl-1" scope=" col-5">Expenditure Till Now</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr class="bottom-border left-border" *ngFor="let projects of projects">
+      <td class="right-border pl-1">{{projects['projecttype']}}</td>
+      <td class="right-border pl-1">{{projects['assettype']}}</td>
+      <td class="right-border text-right pl-1">{{projects['exp']}}</td>
+    </tr>
+    
+    <tr class= "bottom-border left-border">
+      <td>Total</td>
+      <td class="right-border"></td>
+      <td class="right-border text-right pl-1">{{totalexp}}</td>
+    </tr>
+  </tbody>
+  
+  </table>
+</div>

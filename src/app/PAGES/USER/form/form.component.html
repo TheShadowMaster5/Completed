@@ -1,0 +1,291 @@
+<div class="row backimage m-0" styles="width:100vw,height:100vh">
+
+  <div class="row m-0" style="width:100vw">
+    <div class="col-12"><p></p></div>
+    <div class="col-12 text-center"><h4>MIS SPD RUSA CHD</h4></div>
+    <div class="col-12"><p></p></div>
+  </div>
+
+  <!--...... Form .......-->
+    <div>
+      <form [formGroup]="Revise_Action_Plan_Form" (ngSubmit)="Count_Child(Revise_Action_Plan_Form.value)">
+
+        <!-- ...Project_Type... -->
+          <div class="row m-0" style="width:100vw">
+    
+            <div class="form-group col-12 text-center m-0">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline">
+                  <mat-label class="font-size">Project Type</mat-label>
+                <mat-select class="font-size" formControlName="Project_Type" placeholder="Project Type">
+                 <mat-option value="Construction">Construction</mat-option>
+                 <mat-option value="Renovation">Renovation</mat-option>
+                 <mat-option value="Equipment">Equipment</mat-option>
+                </mat-select>
+                
+                <mat-icon matSuffix color="accent" [hidden] ="!Revise_Action_Plan_Form.controls['Project_Type'].valid">check</mat-icon>
+                <mat-error *ngIf ="!Revise_Action_Plan_Form.controls['Project_Type'].valid && Revise_Action_Plan_Form.controls['Project_Type'].touched">Please Enter the Project Type</mat-error>
+              </mat-form-field>
+            </div>
+      
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Title... -->
+          <div class="row m-0 project_type" style="width:100vw">
+            <div class="form-group col-12 text-center m-0 project_type">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline" class="inside">
+                <mat-label class="font-size">Title</mat-label>
+                <input type="text" matInput formControlName="Title"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Title'].valid">check</mat-icon>
+                <mat-error *ngIf ="!Revise_Action_Plan_Form.controls['Title'].valid && Revise_Action_Plan_Form.controls['Title'].touched">Please Enter The Title</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Tentative Duration... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Tentative Duration</mat-label>
+                <input type="text" matInput formControlName="Tentative_Duration"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Tentative_Duration'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Tentative_Duration').errors?.required && Revise_Action_Plan_Form.controls['Tentative_Duration'].touched">Please Enter The Tentative Duration</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.get('Contact').errors?.minlength || Revise_Action_Plan_Form.get('Contact').errors?.maxlength">Please Enter 10 digit Contact number</mat-error> -->
+              </mat-form-field>
+            </div>
+      
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Tentative Finish Date... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Tentative Finish Date</mat-label>
+                <input type="text" matInput formControlName="Tentative_Finish_Date"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Tentative_Finish_Date'].valid">check</mat-icon>
+                <mat-error *ngIf ="!Revise_Action_Plan_Form.controls['Tentative_Finish_Date'].valid && Revise_Action_Plan_Form.controls['Tentative_Finish_Date'].touched">Please Enter the Tentative_Finish_Date</mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Tentative_Exp... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Tentative Expenditure</mat-label>
+                <input type="text" matInput formControlName="Tentative_Exp"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Tentative_Exp'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Tentative_Exp').errors?.required">Please Enter the Tentative Expenditure</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.get('Password').errors?.minlength">Enter At Least 6 Characters</mat-error> -->
+              </mat-form-field>    
+            </div> 
+            
+          </div>
+        <!-- .............. -->
+
+        <!-- ...Geo_tagged_Pics... -->
+          <div class="row m-0" style="width:100vw">
+      
+            <div class="form-group col-12 text-center m-0">  <!--Confirm Password-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Geo Tagged Pics</mat-label>
+                <input type="text" matInput formControlName="Geo_tagged_Pics"/>
+                <mat-icon matSuffix color="accent" [hidden] ="!Revise_Action_Plan_Form.controls['Geo_tagged_Pics'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Geo_tagged_Pics').errors?.required && Revise_Action_Plan_Form.controls['Geo_tagged_Pics'].touched">Please Enter The Geo_tagged_Pics</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.controls['ConfirmPassword'].errors?.MatchPassword">The Password Does Not Matched</mat-error> -->
+              </mat-form-field>
+            </div>
+      
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Upload In Fundtracker Form... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Upload In Fundtracker Form</mat-label>
+                <input type="text" matInput formControlName="Upload_In_Fundtracker_Form"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Upload_In_Fundtracker_Form'].valid">check</mat-icon>
+                <mat-error *ngIf ="!Revise_Action_Plan_Form.controls['Upload_In_Fundtracker_Form'].valid && Revise_Action_Plan_Form.controls['Upload_In_Fundtracker_Form'].touched">Please Enter The Upload In Fundtracker Form</mat-error>
+              </mat-form-field>
+            </div>
+      
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Exp_June... -->
+          <div class="row m-0" style="width:100vw">
+      
+            <div class="form-group col-12 text-center m-0">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Expenditure June</mat-label>
+                <input type="text" matInput formControlName="Exp_June"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Exp_June'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Exp_June').errors?.required && Revise_Action_Plan_Form.controls['Exp_June'].touched">Please Enter The Contact</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.get('Contact').errors?.minlength || Revise_Action_Plan_Form.get('Contact').errors?.maxlength">Please Enter 10 digit Contact number</mat-error> -->
+              </mat-form-field>
+            </div>
+
+          </div>
+        <!-- ............. -->
+
+        <!-- ... Exp_July... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">  <!--Email Id-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size"> Expenditure July</mat-label>
+                <input type="text" matInput formControlName="Exp_July"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Exp_July'].valid">check</mat-icon>
+                <mat-error *ngIf ="!Revise_Action_Plan_Form.controls['Exp_July'].valid && Revise_Action_Plan_Form.controls['Exp_July'].touched">Please Enter The Valid Expenditure July</mat-error>
+              </mat-form-field>
+            </div>
+      
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Exp_Aug... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Expenditure Aug</mat-label>
+                <input type="text" matInput formControlName="Exp_Aug"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Exp_Aug'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Exp_Aug').errors?.required">Please Enter The Expenditure Aug</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.get('Password').errors?.minlength">Enter At Least 6 Characters</mat-error> -->
+              </mat-form-field>    
+            </div> 
+
+          </div>
+        <!-- .............. -->
+
+        <!-- ...Exp_Sept... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">  <!--Confirm Password-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Expenditure Sept</mat-label>
+                <input type="text" matInput formControlName="Exp_Sept"/>
+                <mat-icon matSuffix color="accent" [hidden] ="!Revise_Action_Plan_Form.controls['Exp_Sept'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Exp_Sept').errors?.required">Please Enter The Expenditure Sept</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.controls['ConfirmPassword'].errors?.MatchPassword">The Password Does Not Matched</mat-error> -->
+              </mat-form-field>
+            </div>
+      
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Exp_Oct... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Expenditure Oct</mat-label>
+                <input type="text" matInput formControlName="Exp_Oct"/>
+                <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Exp_Oct'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Exp_Oct').errors?.required">Please Enter the Expenditure Oct</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.get('Password').errors?.minlength">Enter At Least 6 Characters</mat-error> -->
+              </mat-form-field>    
+            </div> 
+
+          </div>
+        <!-- .............. -->
+
+        <!-- ...Exp_Nov... -->
+          <div class="row m-0" style="width:100vw">
+      
+            <div class="form-group col-12 text-center m-0">  <!--Confirm Password-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Expenditure Nov</mat-label>
+                <input type="text" matInput formControlName="Exp_Nov"/>
+                <mat-icon matSuffix color="accent" [hidden] ="!Revise_Action_Plan_Form.controls['Exp_Nov'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Exp_Nov').errors?.required">Please Enter The Expenditure Nov</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.controls['ConfirmPassword'].errors?.MatchPassword">The Password Does Not Matched</mat-error> -->
+              </mat-form-field>
+            </div>
+
+          </div>
+        <!-- ............. -->
+
+        <!-- ...Exp_Dec... -->
+          <div class="row m-0" style="width:100vw">
+
+            <div class="form-group col-12 text-center m-0">  <!--Confirm Password-->
+              <mat-form-field style="width:100%" appearance="outline">
+                <mat-label class="font-size">Expenditure Dec</mat-label>
+                <input type="text" matInput formControlName="Exp_Dec"/>
+                <mat-icon matSuffix color="accent" [hidden] ="!Revise_Action_Plan_Form.controls['Exp_Dec'].valid">check</mat-icon>
+                <mat-error *ngIf ="Revise_Action_Plan_Form.get('Exp_Dec').errors?.required">Please Enter The Expenditure Dec</mat-error>
+                <!-- <mat-error *ngIf ="Revise_Action_Plan_Form.controls['ConfirmPassword'].errors?.MatchPassword">The Password Does Not Matched</mat-error> -->
+              </mat-form-field>
+            </div>
+
+          </div>
+        <!-- ............. -->
+
+        <!-- Image -->
+        <div class="row m-0" style="width:100vw">
+          <div class="col-12"><p></p></div> <!---->
+
+          <div class="col-3">
+            <p></p>
+          </div>
+          
+          <div class="col-6 px-0 text-center">
+              <button mat-raised-button color="accent" (click)="Go_To_Gallery()" style="width:100%">Upload Images and Files</button>
+          </div>
+
+          <div class="col-3">
+            <p></p>
+          </div>
+
+        </div>  
+        <!-- ....... -->
+        
+        <!-- ....Button.... -->
+          <div class="row m-0" style="width:100vw">
+            <div class="col-12"><p></p></div> <!---->
+
+            <div class="col-3">
+              <p></p>
+            </div>
+            
+            <div class="col-6 px-0 text-center">
+              <button mat-raised-button color="accent" type="Submit" style="width:100%" [disabled]="!Revise_Action_Plan_Form.valid">Submit</button>
+            </div>
+
+            <div class="col-3">
+              <p></p>
+            </div>
+
+          </div>  
+        <!-- ............ -->
+          
+    </form>
+
+  </div>
+
+    <div class="row">
+      <div class="col-12"> 
+        <p></p>
+      </div>
+      <div class="col-12"> 
+       <p></p>
+     </div>
+    </div>
+     
+  <!-- ..............  -->
+</div>
+
+
+
+
