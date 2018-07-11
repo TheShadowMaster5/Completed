@@ -4,7 +4,7 @@ import {AngularFireDatabase} from 'angularfire2/database'
 import {AngularFireAuth} from 'angularfire2/auth';
 import { PlatformLocation,Location } from '@angular/common'
 import { StorePicsProviderService } from '../../../Image_Provider/store-pics-provider.service';
-import { DatabaseService } from '../../../SERVICE/Database/database.service';
+
 
 @Component({
   selector: 'app-form-list-page',
@@ -22,7 +22,7 @@ export class FormListPageComponent implements OnInit {
   constructor(
               private Router:Router, private AFDB:AngularFireDatabase, private AngularFireAuth:AngularFireAuth,
               private Platform:PlatformLocation,private location:Location,private render: Renderer2, private _zone: NgZone,
-              private StorePicsProvider:StorePicsProviderService, private Database: DatabaseService) { }
+              private StorePicsProvider:StorePicsProviderService) { }
 
   ngOnInit() 
   {
@@ -34,12 +34,11 @@ export class FormListPageComponent implements OnInit {
     this.Uid = this.AngularFireAuth.auth.currentUser.uid;           
     this.Retrieve_Data_From_Database();
   }
-
-  
   
   Go_To_Filled_Forms(index)
   {
-    this.Router.navigate(['/FilledForm',{Form_Name:this.Getting_Forms_Name()}]);
+    var Form_Name = this.Getting_Forms_Name();
+    this.Router.navigate(['/FilledForm',{Form_Name:Form_Name,Index:index}]);
   }
 
   Go_To_Forms()
@@ -49,14 +48,9 @@ export class FormListPageComponent implements OnInit {
 
   Retrieve_Data_From_Database()
   {
-    //  var data =  this.Database.Get_Data();
-    //  console.log("asdfadf");
-    //  console.log(data);
-  // }
-  // {
     console.log("calling retrieve");
     var ref = this.AFDB.database.ref('Signup').child(this.Uid);
-    ref.on("value", snapshot => {
+    ref.once("value", snapshot => {
                                    this.Data = snapshot.child('Revised_Fundtracker').val();
                                    var num = snapshot.child('Revised_Fundtracker').numChildren();
                                    this.Num_Of_Child = num;
@@ -106,5 +100,11 @@ export class FormListPageComponent implements OnInit {
        FormNames.push(i);
      }
      return FormNames;
+  }
+
+  Logout()
+  {
+    this.AngularFireAuth.auth.signOut();
+    this.Router.navigateByUrl("Login");
   }
 }

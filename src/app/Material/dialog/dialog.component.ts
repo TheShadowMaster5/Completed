@@ -23,7 +23,7 @@ export class DialogComponent
   { 
     this.Title = data.Title;
     this.Message = data.Message;
-    this.Nav = data.Navigate;
+    
     console.log(data.TaskDone);
     if(data.TaskDone)
     {
@@ -37,10 +37,7 @@ export class DialogComponent
     }
   }
 
-  Navigate()
-  {
-      this.Router.navigateByUrl(this.Nav);
-  }
+ 
 }
   
 

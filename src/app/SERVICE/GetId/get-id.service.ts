@@ -11,7 +11,7 @@ export class GetIdService {
 
   GetId(emailId)
   {
-    return this.http.post("http://localhost:8080/Apis/GetId.php",{"emailId":emailId})
+    return this.http.post("http://misrusachd.in/fundgetterapi/GetId.php",{"emailId":emailId})
                     .map(res=>res.json());
   }
 }

@@ -40,4 +40,10 @@ export class UserPageComponent implements OnInit {
                     }
           )
   }
+
+  Logout()
+  {
+    this.AngularFireAuth.auth.signOut();
+    this.Router.navigateByUrl("Login");
+  }
 }

@@ -6,6 +6,11 @@ import {FormGroup,FormBuilder,Validators, FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DialogComponent} from '../../../Material/dialog/dialog.component';
+import { Location } from '@angular/common';
+declare let cordova: any;
+declare let navigator: any;
+let device;
+
 
 @Component({
   selector: 'app-filled-form-pages',
@@ -14,38 +19,24 @@ import { DialogComponent} from '../../../Material/dialog/dialog.component';
 })
 export class FilledFormPagesComponent implements OnInit {
 
-  Project_Type:any;
-  Title:any;
-  Tentative_Duration:any;
-  Tentative_Finish_Date:any;
-  Tentative_Exp:any;
-  Geo_tagged_Pics:any;
-  Upload_In_Fundtracker_Form:any;
-  Exp_June:any;
-  Exp_July:any;
-  Exp_Aug:any;
-  Exp_Sept:any;
-  Exp_Oct:any;
-  Exp_Nov:any;
-  Exp_Dec:any;
-  Remarks:any;
   Form_Name:string;
-  Operation_Type:any;
   Uid:any;
   Revise_Action_Plan_Form:FormGroup;
+  images:any;
 
   constructor(
                 private StorePicsProvider:StorePicsProviderService,private AFDB: AngularFireDatabase,
                 private AngularFireAuth:AngularFireAuth,private Router:Router,
                 private ActivatedRoute:ActivatedRoute, private render: Renderer2, 
-                private _zone: NgZone, private FormBuilder:FormBuilder, private dialog:MatDialog
+                private _zone: NgZone, private FormBuilder:FormBuilder,
+                 private dialog:MatDialog,private Location:Location
               ) 
               { }
 
   ngOnInit() 
   {
     this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
-                                                                                  this.Router.navigate(['/FormList']);
+                                                                              this.Router.navigate(['/FormList']);
                                                                             })
                                                       });
 
@@ -69,13 +60,16 @@ export class FilledFormPagesComponent implements OnInit {
     this.Uid = this.AngularFireAuth.auth.currentUser.uid;
     this.ActivatedRoute.params
     .subscribe(params=>{
-                          console.log(params);
-                          this.Retrieve_Data_From_Database(params.Form_Name);
+                          console.log(params.Form_Name);
+                          console.log(params.Form_Name[0]);
+                          var Form_name = params.Form_Name.split(",",params.Index+1);
+                          this.Retrieve_Data_From_Database(Form_name[params.Index]);
+                          
                        }
               );
   }
 
-  Update_Data()
+  Update_Data(Form_Data)
   {
     console.log("in upFinishDate"+this.Form_Name);
     var ref = this.AFDB.database.ref("Signup")
@@ -85,20 +79,20 @@ export class FilledFormPagesComponent implements OnInit {
 
                                
     ref.update({ 
-                  Project_Type:this.Project_Type,
-                  Title:this.Title,
-                  Tentative_Duration:this.Tentative_Duration,
-                  Tentative_Finish_FinishDate:this.Tentative_Finish_Date,
-                  Tentative_Exp:this.Tentative_Exp,
-                  Geo_tagged_Pics:this.Geo_tagged_Pics,
-                  Upload_In_Fundtracker_Form:this.Upload_In_Fundtracker_Form,
-                  Exp_June:this.Exp_June,
-                  Exp_July:this.Exp_July,
-                  Exp_Aug:this.Exp_Aug,
-                  Exp_Sept:this.Exp_Sept,
-                  Exp_Oct:this.Exp_Oct,
-                  Exp_Nov:this.Exp_Nov,
-                  Exp_Dec:this.Exp_Dec                
+                  Project_Type:Form_Data.Project_Type,
+                  Title:Form_Data.Title,
+                  Tentative_Duration:Form_Data.Tentative_Duration,
+                  Tentative_finish_date:Form_Data.Tentative_Finish_Date,
+                  Tentative_Exp:Form_Data.Tentative_Exp,
+                  Geo_tagged_Pics:Form_Data.Geo_tagged_Pics,
+                  Upload_In_Fundtracker_Form:Form_Data.Upload_In_Fundtracker_Form,
+                  Exp_June:Form_Data.Exp_June,
+                  Exp_July:Form_Data.Exp_July,
+                  Exp_Aug:Form_Data.Exp_Aug,
+                  Exp_Sept:Form_Data.Exp_Sept,
+                  Exp_Oct:Form_Data.Exp_Oct,
+                  Exp_Nov:Form_Data.Exp_Nov,
+                  Exp_Dec:Form_Data.Exp_Dec         
               }).then(()=>{
                             var ref = this.AFDB.database.ref("Signup")
                                         .child(this.Uid)
@@ -119,35 +113,56 @@ export class FilledFormPagesComponent implements OnInit {
                           .catch(error=>{
                                           this.Show_Message("Uploading Error","Error in Uploading Data Please Try Again",false)
                                         });   
-    }
+  }
 
   Go_To_Gallery()
   {
-    this.Router.navigateByUrl("Gallery");
+    if( navigator != undefined)
+    {
+      navigator.camera.getPicture(
+        (imageData) => {
+                          let image = "data:image/jpeg;base64," + imageData; 
+                          this.StorePicsProvider.Store_Pics_Camera(image);
+                          this._zone.run(()=>{this.images = this.StorePicsProvider.Get_Pics()});
+                        },
+        (error) =>{},
+        {
+          quality: 100,
+          targetHeight:100,
+          targetWidth:100,
+          destinationType: navigator.camera.DestinationType.DATA_URL,
+          encodingType: navigator.camera.EncodingType.JPEG,
+          //mediaType: navigator.camera.MediaType.PHOTOLIBRARY,
+          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+        }
+      )
+    }
   }
+  
 
   Retrieve_Data_From_Database(formname)
   {
     this.Form_Name =formname;
+    console.log(formname);
     console.log("calling retrieve");
     var ref = this.AFDB.database.ref('Signup').child(this.Uid);
-    ref.on("value", snapshot => {
+    ref.once("value", snapshot => {
                                   var Data = snapshot.child('Revised_Fundtracker').child(formname).val();
                                   console.log("Data"); console.log(Data);
-                                  this.Project_Type = Data.Project_Type;
-                                  this.Title = Data.Title;
-                                  this.Tentative_Duration = Data.Tentative_Duration;
-                                  this.Tentative_Finish_Date = Data.Tentative_finish_date;
-                                  this.Tentative_Exp = Data.Tentative_Exp;
-                                  this.Geo_tagged_Pics = Data.Geo_tagged_Pics;
-                                  this.Upload_In_Fundtracker_Form = Data.Upload_In_Fundtracker_Form;
-                                  this.Exp_June = Data.Exp_June;
-                                  this.Exp_July = Data.Exp_July;
-                                  this.Exp_Aug = Data.Exp_Aug;
-                                  this.Exp_Sept = Data.Exp_Sept;
-                                  this.Exp_Oct = Data.Exp_Oct;
-                                  this.Exp_Nov= Data.Exp_Nov;
-                                  this.Exp_Dec = Data.Exp_Dec;
+                                  this.Revise_Action_Plan_Form.get('Project_Type').setValue(Data.Project_Type);
+                                  this.Revise_Action_Plan_Form.get('Title').setValue(Data.Title);
+                                 this.Revise_Action_Plan_Form.get('Tentative_Duration').setValue(Data.Tentative_Duration);
+                                  this.Revise_Action_Plan_Form.get('Tentative_Finish_Date').setValue(Data.Tentative_finish_date);
+                                  this.Revise_Action_Plan_Form.get('Tentative_Exp').setValue(Data.Tentative_Exp);
+                                  this.Revise_Action_Plan_Form.get('Geo_tagged_Pics').setValue(Data.Geo_tagged_Pics);
+                                  this.Revise_Action_Plan_Form.get('Upload_In_Fundtracker_Form').setValue(Data.Upload_In_Fundtracker_Form);
+                                  this.Revise_Action_Plan_Form.get('Exp_June').setValue(Data.Exp_June);
+                                  this.Revise_Action_Plan_Form.get('Exp_July').setValue(Data.Exp_July);
+                                  this.Revise_Action_Plan_Form.get('Exp_Aug').setValue(Data.Exp_Aug);
+                                  this.Revise_Action_Plan_Form.get('Exp_Sept').setValue(Data.Exp_Sept);
+                                  this.Revise_Action_Plan_Form.get('Exp_Oct').setValue(Data.Exp_Oct);
+                                  this.Revise_Action_Plan_Form.get('Exp_Nov').setValue(Data.Exp_Nov);
+                                  this.Revise_Action_Plan_Form.get('Exp_Dec').setValue(Data.Exp_Dec);
 
                                   if(Data.Images.Images!="No Image")
                                   {
@@ -166,5 +181,6 @@ export class FilledFormPagesComponent implements OnInit {
   Show_Message(Title,Message,TaskDone) 
   {
     const MatDialogRef = this.dialog.open(DialogComponent,{data:{Title:Title,Message:Message,TaskDone,Navigate:"FormList"}});
+    MatDialogRef.afterClosed().subscribe(()=>this.Router.navigateByUrl("FormList"));
   }
 }

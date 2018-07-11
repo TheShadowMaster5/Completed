@@ -1,4 +1,4 @@
-#Tue Jul 10 12:02:47 IST 2018
+#Wed Jul 11 16:43:34 IST 2018
 base.0=/home/spd/AngularProjects/Finishing-master/MISAPP/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
 file.0=/home/spd/AngularProjects/Finishing-master/MISAPP/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

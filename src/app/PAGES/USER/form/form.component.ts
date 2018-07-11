@@ -6,6 +6,9 @@ import {StorePicsProviderService} from '../../../Image_Provider/store-pics-provi
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DialogComponent} from '../../../Material/dialog/dialog.component';
+declare let cordova: any;
+declare let navigator: any;
+let device;
 
 @Component({
   encapsulation:ViewEncapsulation.Emulated,
@@ -16,6 +19,7 @@ import { DialogComponent} from '../../../Material/dialog/dialog.component';
 export class FormComponent implements OnInit {
 
   count:any;
+  images:any;
   public base64Image : String;
 
   Revise_Action_Plan_Form:FormGroup;
@@ -126,11 +130,31 @@ export class FormComponent implements OnInit {
     
   Go_To_Gallery()
   {
-    this.Router.navigateByUrl("Gallery");
+    if( navigator != undefined)
+    {
+      navigator.camera.getPicture(
+        (imageData) => {
+                          let image = "data:image/jpeg;base64," + imageData; 
+                          this.StorePicsProvider.Store_Pics_Camera(image);
+                          this._zone.run(()=>{this.images = this.StorePicsProvider.Get_Pics()});
+                        },
+        (error) =>{},
+        {
+          quality: 100,
+          targetHeight:100,
+          targetWidth:100,
+          destinationType: navigator.camera.DestinationType.DATA_URL,
+          encodingType: navigator.camera.EncodingType.JPEG,
+          //mediaType: navigator.camera.MediaType.PHOTOLIBRARY,
+          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+        }
+      )
+    }
   }
   
   Show_Message(Title,Message,TaskDone) 
   {
-    const MatDialogRef = this.dialog.open(DialogComponent,{data:{Title:Title,Message:Message,TaskDone,Navigate:"FormList"}});
+    const MatDialogRef = this.dialog.open(DialogComponent,{data:{Title:Title,Message:Message,TaskDone}});
+    MatDialogRef.afterClosed().subscribe(()=>this.Router.navigateByUrl("FormList"));
   }
 }

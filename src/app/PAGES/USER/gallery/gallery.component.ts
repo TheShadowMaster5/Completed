@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, NgZone } from '@angular/core';
 import { StorePicsProviderService } from '../../../Image_Provider/store-pics-provider.service';
+import { Router, ActivatedRoute } from '@angular/router';
 declare let cordova: any;
 declare let navigator: any;
 let device;
@@ -12,11 +13,26 @@ let device;
 export class GalleryComponent implements OnInit 
 {
   images:any;
-  constructor(private StorePicsProvider:StorePicsProviderService) { }
+  Type:any;
+  constructor(
+                private StorePicsProvider:StorePicsProviderService, private render:Renderer2,
+                private _zone:NgZone, private Router: Router, private ActivatedRoute:ActivatedRoute
+             ) { }
 
   ngOnInit() 
   {
+    this.ActivatedRoute.params
+    .subscribe(params=>{
+                          this.Type = params.Type;
+                          console.log(this.Type);
+                       }
+              );
 
+    this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
+                                                                                this.Router.navigateByUrl(this.Type);
+                                                                            })
+                                                     });
+    this.images = this.StorePicsProvider.Get_Pics();                                                 
   }
 
   Delete(index)
@@ -34,11 +50,10 @@ export class GalleryComponent implements OnInit
                           let image = "data:image/jpeg;base64," + imageData; 
                           this.StorePicsProvider.Store_Pics_Camera(image);
                           this.images = this.StorePicsProvider.Get_Pics();
-                          alert(image);
                         },
         (error) =>{},
         {
-          quality: 75,
+          quality: 100,
           targetHeight:100,
           targetWidth:100,
           destinationType: navigator.camera.DestinationType.DATA_URL,
@@ -64,7 +79,7 @@ export class GalleryComponent implements OnInit
                         },
         (error) =>{},
         {
-          quality: 75,
+          quality: 100,
           targetHeight:100,
           targetWidth:100,
           destinationType: navigator.camera.DestinationType.DATA_URL,

@@ -1,9 +1,11 @@
 <div class="row m-0" style="width:100vw">
   <div class="backimage">  
     <!-- Header -->
-      <div class="row m-0 bg-success" style="width:100vw">
+     <div class="row m-0 bg-success" style="width:100vw">
         <div class="col-12" ><p></p></div> <!--Space-->
-        <div class="col-12 text-center text-white">Forms</div>  <!--Header-->
+        <div class="col-7 text-right text-white">FORMS</div>
+        <div class="col-1 text-right text-white"><p></p></div>
+        <div class="col-4 text-right text-white"><button  class="m-0 p-0" mat-raised-button color= "warn" (click)="Logout()">Logout</button></div>  <!--Header-->
         <div class="col-12" ><p></p></div> <!--Space-->
       </div>
     <!--....... -->
@@ -15,9 +17,7 @@
     <!-- ...... -->
     
     <!-- Report -->
-    <div *ngIf="Title">
-      
-       <div class="row m-0" *ngFor="let Titles of Title;let i = index">
+     <div class="row m-0" *ngFor="let Titles of Title;let i = index">
       
         <div class="col-12 pb-5"> 
           <mat-card class="p-0 m-0">
@@ -29,7 +29,7 @@
                 <div class="col-1"></div>
                 <div class="col-6 pl-0">
                   <mat-card-content>
-                    <h6>Title:-{{Titles}}</h6>
+                    <h6>Title:-{{Title[i]}}</h6>
                     <h6>Type Of Activity:- {{Type_Of_Activity[i]}}</h6>
                     </mat-card-content>
                   </div>  
@@ -50,24 +50,29 @@
             </mat-card-footer>
 
             <!-- Space -->
-        <div class="row m-0">
-            <div class="col-12"><p></p></div>
-          </div>
-        <!-- ...... -->
+            <div class="row m-0">
+                <div class="col-12"><p></p></div>
+              </div>
+            <!-- ...... -->
           </div>
      
-      
-      </div> 
+        </div>
+        
+        <div class="row m-0" style="width:100vw"> 
+          <div class="col-4"><p></p></div>
+          <div class="col-4">
+            <button  mat-raised-button color="primary" class="text-center"(click)="Go_To_Forms()">Add</button>
+          </div>
+          <div class="col-4"><p></p></div>
+        </div>
     <!-- ...... -->
+     <!-- Space -->
+     <div class="row m-0">
+      <div class="col-12"><p></p></div>
+    </div>
+  <!-- ...... -->
     </div>
 
-    <div class="row"> 
-      <div class="col-4"><p></p></div>
-      <div class="col-4">
-        <button  mat-raised-button color="primary" class="text-center"(click)="Go_To_Forms()">Add</button>
-      </div>
-      <div class="col-4"><p></p></div>
-    </div>
-  </div>
+   
 </div>
  

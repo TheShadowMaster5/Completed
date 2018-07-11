@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';;
+import { Component, OnInit, Renderer2, NgZone } from '@angular/core';;
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
@@ -21,12 +21,17 @@ export class LoginPageComponent implements OnInit
   LoginForm:FormGroup;
   constructor(
                private FormBuilder:FormBuilder,private AngularFireAuth:AngularFireAuth,
-               private Router:Router,private dialog:MatDialog,private AFDB:AngularFireDatabase
+               private Router:Router,private dialog:MatDialog,private AFDB:AngularFireDatabase,
+               private render:Renderer2, private _zone:NgZone
              ) 
              { }
 
   ngOnInit() 
   {
+    this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
+                                                                              this.Router.navigate(['nowhere']);
+                                                                            })
+                                                                        });
     this.LoginForm = this.FormBuilder.group({
                                               EmailId:[null,Validators.compose([Validators.required,Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
                                               Password:[null,Validators.required]
