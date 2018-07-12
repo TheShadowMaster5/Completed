@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, Renderer2 } from '@angular/core';
 import {FundGetterService} from '../../../../SERVICE/FundGetter/fund-getter.service';
 import { FtinfoService } from '../../../../SERVICE/Ftinfo/ftinfo.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -34,11 +34,22 @@ export class CollegewiseFundtrackerPageComponent implements OnInit
   expoth:any=0;
   collegename:any;
   
-  constructor(private getfundgetter:FundGetterService,private ftinfo: FtinfoService,private router: Router,
+  constructor(
+              private getfundgetter:FundGetterService,private ftinfo: FtinfoService,
+              private Router: Router,private render:Renderer2, private _zone:NgZone,
               private route: ActivatedRoute) {  }
     
   ngOnInit()
   {
+    var Type = this.route.snapshot.params['Type'];
+    console.log(Type);
+    this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
+                                                                              this.Router.navigate([Type]);
+                                                                            }
+                                                                    )
+                                                      }
+                      );
+
     var id = this.route.snapshot.params['userid']; 
     console.log(id);
     // STEP:1 :- The service will provides us the colleges uid in the database

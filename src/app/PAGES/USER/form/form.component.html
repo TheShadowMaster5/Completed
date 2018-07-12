@@ -65,12 +65,14 @@
             <div class="form-group col-12 text-center m-0">  <!--Email Id-->
               <mat-form-field style="width:100%" appearance="outline">
                 <mat-label class="font-size">Tentative Finish Date</mat-label>
-                <input type="text" matInput formControlName="Tentative_Finish_Date"/>
+                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()"  readonly for="myDatepicker" formControlName="Tentative_Finish_Date"/>
                 <mat-icon matSuffix color="accent" [hidden]="!Revise_Action_Plan_Form.controls['Tentative_Finish_Date'].valid">check</mat-icon>
+                <mat-datepicker #myDatepicker></mat-datepicker>
+
                 <mat-error *ngIf ="!Revise_Action_Plan_Form.controls['Tentative_Finish_Date'].valid && Revise_Action_Plan_Form.controls['Tentative_Finish_Date'].touched">Please Enter the Tentative_Finish_Date</mat-error>
               </mat-form-field>
             </div>
-
+            
           </div>
         <!-- ............. -->
 

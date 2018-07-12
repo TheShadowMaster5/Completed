@@ -9,10 +9,13 @@ export class GetIdService {
 
   constructor(private http:Http) { }
 
-  GetId(emailId)
+  GetCompany()
   {
-    return this.http.post("http://misrusachd.in/fundgetterapi/GetId.php",{"emailId":emailId})
-                    .map(res=>res.json());
+    return this.http.get("http://misrusachd.in/fundgetterapi/selectnewlinks.php")
+                    .map(res=>{
+                                 return  res.json();
+                              }
+                        );
   }
 }
 

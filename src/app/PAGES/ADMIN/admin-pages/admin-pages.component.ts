@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, Renderer2 } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 
@@ -9,13 +9,21 @@ import { Router } from '@angular/router';
 })
 export class AdminPagesComponent implements OnInit {
 
-  constructor(private AngularFireAuth:AngularFireAuth,private Router:Router) { }
+  constructor(private AngularFireAuth:AngularFireAuth,private Router: Router,private render:Renderer2, private _zone:NgZone) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
+                                                                              this.Router.navigate(['Admin']);
+                                                                            }
+                                                                    )
+                                                      }
+                      );
   }
 
   Logout()
   {
-    this.AngularFireAuth.auth.signOut().then(()=>{this.Router.navigateByUrl("Login")})
+    this.AngularFireAuth.auth.signOut();
+    this.Router.navigateByUrl("Login");
   }
 }

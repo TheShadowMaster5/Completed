@@ -17,10 +17,10 @@
     <!-- ...... -->
     
     <!-- Report -->
-      <div class="row m-0">
+      <div class="row m-0" [hidden]="id==''">
       
         <div class="col-12">
-          <a routerLink="/show/{{id}}">
+          <a routerLink="/show/{{id}}/UserPage">
             <mat-card class="p-0 m-0">
               <div class="row bg-dark m-0 p-0 mb-3">
                 <div class="col-12 text-center text-white py-2"><h6>Action Plan Report</h6></div>
@@ -40,16 +40,16 @@
     <!-- ...... -->
     
     <!-- Space -->
-      <div class="row m-0">
+      <div class="row m-0" [hidden]="id==''">
         <div class="col-12"><p></p></div>
       </div>
     <!-- ...... -->
       
     <!-- Fundtracker Summary -->
-      <div class="row m-0">
+      <div class="row m-0" [hidden]="ftlink==''">
      
         <div class="col-12">
-          <a routerLink="/ftsummary/{{ftlink}}">
+          <a routerLink="/ftsummary/{{ftlink}}/UserPage">
             <mat-card class="p-0 m-0">
               <div class="row bg-dark m-0 p-0 mb-3">
                 <div class="col-12 text-center text-white py-2"><h6>Fundtracker Summary</h6></div>
@@ -70,7 +70,7 @@
     <!-- ...... -->
 
     <!-- Space -->
-      <div class="row m-0">
+      <div class="row m-0" [hidden]="ftlink==''">
         <div class="col-12"><p></p></div>
       </div>
     <!-- ..... -->
@@ -106,6 +106,8 @@
         <div class="col-12"><p></p></div>
       </div>
     <!-- ...... -->
+
+  
     <!-- ...... -->
   </div>
 </div>

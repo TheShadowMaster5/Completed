@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, Renderer2 } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { FundGetterService } from '../../../../SERVICE/FundGetter/fund-getter.service';
 
@@ -9,14 +9,22 @@ import { FundGetterService } from '../../../../SERVICE/FundGetter/fund-getter.se
 })
 export class ActionPlanComponent implements OnInit {
 
-  constructor( private router: Router,
-    private route: ActivatedRoute,
-    private _getterService:FundGetterService
+  constructor( 
+    private Router: Router,private render:Renderer2, private _zone:NgZone,
+    private route: ActivatedRoute,private _getterService:FundGetterService
 ) { }
 actplan:any=[];
 college:any;
   ngOnInit() 
   {
+    var Type = this.route.snapshot.params['Type'];
+    this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
+                                                                              this.Router.navigate([Type]);
+                                                                            }
+                                                                    )
+                                                     }
+                      );
+
     this.getActionplan();
   }
 
@@ -31,10 +39,12 @@ college:any;
     this.expren=0;
     this.expeqp=0;
     var id = this.route.snapshot.params['userid'];
+    console.log(id);
     this._getterService.
       getactionplan(id)
       .subscribe(employee =>
         {
+
           this.actplan = employee;
           this.college = employee[0].company;
                   for (var _i = 0; _i < this.actplan.length; _i++) 
@@ -56,7 +66,7 @@ college:any;
 
   goBack()
   {
-    this.router.navigate(['/home']);
+    this.Router.navigate(['/home']);
   }
 
 

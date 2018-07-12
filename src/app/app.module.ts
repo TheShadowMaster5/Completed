@@ -12,7 +12,6 @@ import{Angular_Firebase_Modules} from './Firebase/FirebaseModule';
   import { UserPageComponent } from './PAGES/USER/user-page/user-page.component';
   import { ForgotPasswordPageComponent } from './PAGES/forgot-password-page/forgot-password-page.component';
   import { SignupPageComponent } from './PAGES/signup-page/signup-page.component';
-  import { ActionPageComponent } from './PAGES/USER/action-page/action-page.component';
 //---------------------------------------------------
 
 //-----------------------FORMS -----------------------------
@@ -43,7 +42,6 @@ import { ConsolidatedFundtrackerPageComponent } from './PAGES/ADMIN/consolidated
 import { ActionPlanComponent } from './PAGES/ADMIN/CollegeWisePage/action-plan/action-plan.component';
 import { CollegeWisePageComponent } from './PAGES/ADMIN/CollegeWisePage/college-wise-page/college-wise-page.component';
 import { GetIdService } from './SERVICE/GetId/get-id.service';
-import { GalleryComponent } from './PAGES/USER/gallery/gallery.component';
 import { FormListPageComponent } from './PAGES/USER/form-list-page/form-list-page.component';
 import { FilledFormPagesComponent } from './PAGES/USER/filled-form-pages/filled-form-pages.component';
  
@@ -61,10 +59,10 @@ var config =
   declarations: 
   [
     AppComponent,LoginPageComponent, DialogComponent, UserPageComponent, 
-    ForgotPasswordPageComponent, SignupPageComponent, ActionPageComponent, 
+    ForgotPasswordPageComponent, SignupPageComponent, 
     FundtrackerSummaryComponent, FormComponent, AdminPagesComponent,
     CollegewiseFundtrackerPageComponent, ConsolidatedFundtrackerPageComponent, 
-    ActionPlanComponent, CollegeWisePageComponent, GalleryComponent,FormListPageComponent, 
+    ActionPlanComponent, CollegeWisePageComponent,FormListPageComponent, 
     FilledFormPagesComponent
   ],
   

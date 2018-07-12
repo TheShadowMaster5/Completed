@@ -16,29 +16,39 @@ export class UserPageComponent implements OnInit {
               private AFDB:AngularFireDatabase,private GetIdService:GetIdService,
               private render: Renderer2, private _zone: NgZone,private Router:Router
             ) { }
-  id:any;
-  ftlink:any;
+  id:any="";
+  ftlink:any="";
   
   ngOnInit() 
   {
     this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
-                                                                              
+                                                                               this.Router.navigate(['nowhere']);
                                                                             })
                                                       });
     let uid = this.AngularFireAuth.auth.currentUser.uid;  
     console.log(uid);
-    let ref = this.AFDB.database.ref("Signup").child(uid).child("email");
+    let ref = this.AFDB.database.ref("Signup").child(uid).child("company");
     ref.once('value')
-    .then(Email_Id=>{
-      console.log(Email_Id.val());
-                      this.GetIdService.GetId(Email_Id.val())
+    .then(Company=>{
+                     this.GetIdService.GetCompany()
                           .subscribe(Data=>{
-                                              this.ftlink = Data[0].ftlink;
-                                              this.id = Data[0].id;
+                                             if(Company.val()!="")
+                                              {
+                                                for(let i=0;i<Data.length;i++)
+                                                {
+                                                  if(Company.val()==Data[i].company)
+                                                  {
+                                                    this.ftlink = Data[i].ftlink;
+                                                    this.id = Data[i].id;
+                                                  }
+                                                }
+                                              }
                                             }
                                     )    
                     }
           )
+          this._zone.run(()=>{this.ftlink = this.ftlink;
+                              this.id = this.id;})
   }
 
   Logout()

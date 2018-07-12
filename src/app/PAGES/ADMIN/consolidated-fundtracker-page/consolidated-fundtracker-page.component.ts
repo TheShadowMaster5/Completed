@@ -1,7 +1,7 @@
-import { Component, OnInit,ViewChild,ElementRef,Input } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef,Input, Renderer2, NgZone } from '@angular/core';
 import {FundGetterService} from '../../../SERVICE/FundGetter/fund-getter.service';
 import {FtinfoService} from '../../../SERVICE/Ftinfo/ftinfo.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -31,11 +31,18 @@ export class ConsolidatedFundtrackerPageComponent implements OnInit
   //------------------------------------
 
   constructor(private getfundgetter:FundGetterService,private ftinfo:FtinfoService,
+              private Router: Router,private render:Renderer2, private _zone:NgZone,
               private route:ActivatedRoute) 
   {}
 
   ngOnInit() 
   {
+    this.render.listen('document', 'backbutton', ()=>{this._zone.run(() => {
+                                                                              this.Router.navigate(['Admin']);
+                                                                            }
+                                                                    )
+                                                      }
+                      );
     // STEP:1 :- The service will provides us the colleges uid and Total number of colleges
     // present in the database. We will pass uid i.e (id) to service in STEP:2 
      
